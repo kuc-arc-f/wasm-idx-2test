@@ -7,7 +7,8 @@ import LibDexie from '../../libs/LibDexie';
 import LibCommon from '../../libs/LibCommon';
 //import LibPaginate from '../../libs/LibPaginate';
 import axios from 'axios';
-// import * as wasm from "wasm-idx";
+
+import * as wasm from "wasm-idx";
 //
 class Test extends Component {
     constructor(props){
@@ -33,7 +34,7 @@ class Test extends Component {
 //        console.log( task )
     }
     test1(){
-        for(var i = 1; i<= 1000; i++){
+        for(var i = 1; i<= 1000 ; i++){
             this.add_item(i)
         }
     }        
@@ -47,32 +48,10 @@ class Test extends Component {
         });
         this.dispDom()
     }
-    getPostRow(item){
-        var ret = "<div class='div_post_row_wrap'>";
-        ret += "  <p class='p_title mb-0'>";
-        ret += item.title;
-        ret += " , "+ item.created_at + " ,";
-        ret += "<span>ID :" + item.id + "</span>";
-        ret += "  </p>";
-        ret += "  <hr class='hr_ex1 mt-1 mb-1'>";
-        ret += "</div>";
-        return ret;
-    }
     dispDom(){
         if(this.state.data instanceof Array){
             var t0 = performance.now();
-            var s_elm = "";     
-            var self = this
-            this.state.data.map(function(object, i){
-//                console.log( object )
-                var s = self.getPostRow( object );
-                s_elm += s;
-            })            
-// console.log( s_elm )
-            var parent = window.document.getElementById('div_post_wrap');
-            var div = document.createElement('div');
-            div.innerHTML = s_elm;
-            parent.appendChild(div);
+            var s_elm = wasm.wasm_object_array("div_post_wrap", this.state.data );
             var t1 = performance.now();
             console.log("Call to function took= " + (t1 - t0) + " milliseconds.");
         }

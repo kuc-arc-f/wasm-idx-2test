@@ -20,24 +20,50 @@ class Test extends Component {
         this.db.version(config.DB_VERSION).stores( config.DB_STORE );   
         this.get_items();              
     }
-    get_items(){
+    async get_items(){
 //console.log( "#get_items" )
         var self = this
-        this.db.tasks.toArray().then(function (items ) {
+        await this.db.tasks.toArray().then(function (items ) {
             var tasks = LibDexie.get_reverse_items(items)
             self.setState({ data: tasks })
 //console.log( tasks )
         });
+        this.dispDom();
     }    
     handleClick(){
-        console.log("#-handleClick")
-//        console.log( this.state )
+//        console.log("#-handleClick")
+/*
+        let d = wasm.send_example_to_js();
+        console.log( d )
+        let d2 = wasm.receive_example_from_js(d, "f4-from-js")
+        console.log( d2 )
+*/
+
+    }
+    dispDom(){
+        if(this.state.data instanceof Array){
+
+            var t0 = performance.now();
+            var s_elm = wasm.wasm_object_array("div_post_wrap", this.state.data );
+//            console.log( s_elm )
+           var t1 = performance.now();            
+           /*
+            this.state.data.map(function(object, i){
+                var s = wasm.wasm_object_row("div_post_wrap", object );
+            })
+            */
+            console.log("Call to function took= " + (t1 - t0) + " milliseconds.");
+        }
     }
     tabRow(){
         if(this.state.data instanceof Array){
-            var json = JSON.stringify( this.state.data);
-//console.log( json )
-            wasm.wasm_task_disp("div_post_wrap", String(json) );
+            var t0 = performance.now();
+            return this.state.data.map(function(object, i){
+                //var s = wasm.wasm_object_row("div_post_wrap", object );
+// console.log( s )
+            })
+            var t1 = performance.now();
+            console.log("Call to function took= " + (t1 - t0) + " milliseconds.");
         }
     }    
     render() {
@@ -54,7 +80,6 @@ class Test extends Component {
             </div>
             <hr />
             <div id="div_post_wrap">
-                {this.tabRow()}
             </div>
         
         </div>

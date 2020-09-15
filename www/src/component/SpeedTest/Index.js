@@ -1,3 +1,5 @@
+// result: 2,000 rec : 35 - 40 msec( 0.040 sec)
+//
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import Dexie from 'dexie';
@@ -34,7 +36,6 @@ class Index extends Component {
             console.log("#-msSaveBlob-false")
             document.getElementById("download").href = window.URL.createObjectURL(blob);
         }        
-//        console.log( this.state )
     }    
     get_items(){
         var self = this

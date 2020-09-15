@@ -41,7 +41,7 @@ class Index extends Component {
         this.db.tasks.toArray().then(function (items ) {
             var tasks = LibDexie.get_reverse_items(items)
             self.setState({ data: tasks })
-//console.log( tasks )
+console.log( tasks )
         });
     }
     tabRow(){

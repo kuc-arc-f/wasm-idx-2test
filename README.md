@@ -1,12 +1,12 @@
 ﻿# wasm-idx-2test
 
- Version: 0.9.1
+ Version: 0.9.2
 
  Author  : Kouji Nakashima / kuc-arc-f.com
 
  date    : 2020/09/13
 
- update :
+ update : 2020/09/15 
 
 ***
 

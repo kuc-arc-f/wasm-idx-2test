@@ -21,6 +21,7 @@ class Navbar extends React.Component {
                     <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <Link to="/speed_test" className="nav-link">SpeedTest</Link>
                         <Link to="/speed_test_js" className="nav-link">SpeedTest-JS</Link>
+                        <Link to="/speed_test_test" className="nav-link">SpeedTest - Test</Link>
                     </div>
                 </li>
                 <li className="nav-item active">
